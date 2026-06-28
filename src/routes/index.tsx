@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform, animate } from "motion/react";
+import emailjs from "@emailjs/browser";
 import {
   ArrowRight, Phone, MapPin, Mail, Instagram, Facebook, Linkedin, Youtube,
   Compass, Building2, Home, LandPlot, TrendingUp, MessageSquareQuote,
@@ -560,26 +561,92 @@ function Contact() {
 
           <div className="lg:col-span-7">
             <Reveal delay={0.15}>
-              <form onSubmit={(e) => e.preventDefault()} className="border border-border bg-background p-8 sm:p-12">
-                <div className="grid gap-6 sm:grid-cols-2">
-                  <Field label="Full Name" name="name" />
-                  <Field label="Email Address" name="email" type="email" />
-                  <Field label="Phone Number" name="phone" type="tel" />
-                  <Field label="Project of Interest" name="project" />
-                </div>
-                <div className="mt-6">
-                  <Field label="How may we assist you?" name="message" textarea />
-                </div>
-                <button type="submit" className="btn-burgundy mt-10 w-full sm:w-auto">
-                  <span>Submit Enquiry</span>
-                  <ArrowRight className="relative z-10 h-4 w-4" />
-                </button>
-              </form>
+              <ContactForm />
             </Reveal>
           </div>
         </div>
       </div>
     </section>
+  );
+}
+
+function ContactForm() {
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", project: "", message: "" });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init("j7wIAIiSU3LaZ4fOk");
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("loading");
+
+    try {
+      await emailjs.send(
+        "service_4pktbmu",
+        "template_1zywf3j",
+        {
+          to_email: "svrdevelopments.in@gmail.com",
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          project: formData.project,
+          message: formData.message,
+        }
+      );
+      setStatus("success");
+      setMessage("Thank you! Your enquiry has been sent successfully.");
+      setFormData({ name: "", email: "", phone: "", project: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch (err) {
+      setStatus("error");
+      setMessage("Failed to send enquiry. Please try again or contact us directly.");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="border border-border bg-background p-8 sm:p-12">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <ControlledField label="Full Name" name="name" value={formData.name} onChange={handleChange} required />
+        <ControlledField label="Email Address" name="email" type="email" value={formData.email} onChange={handleChange} required />
+        <ControlledField label="Phone Number" name="phone" type="tel" value={formData.phone} onChange={handleChange} required />
+        <ControlledField label="Project of Interest" name="project" value={formData.project} onChange={handleChange} />
+      </div>
+      <div className="mt-6">
+        <ControlledField label="How may we assist you?" name="message" textarea value={formData.message} onChange={handleChange} required />
+      </div>
+      {status !== "idle" && (
+        <div className={`mt-4 p-3 rounded text-sm ${status === "success" ? "bg-green-500/20 text-green-400" : "bg-red-500/20 text-red-400"}`}>
+          {message}
+        </div>
+      )}
+      <button type="submit" disabled={status === "loading"} className="btn-burgundy mt-10 w-full sm:w-auto disabled:opacity-50 disabled:cursor-not-allowed">
+        <span>{status === "loading" ? "Sending..." : "Submit Enquiry"}</span>
+        {status !== "loading" && <ArrowRight className="relative z-10 h-4 w-4" />}
+      </button>
+    </form>
+  );
+}
+
+function ControlledField({ label, name, type = "text", textarea = false, value, onChange, required = false }: { label: string; name: string; type?: string; textarea?: boolean; value: string; onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void; required?: boolean }) {
+  const cls = "peer mt-2 w-full border-0 border-b border-border bg-transparent px-0 pb-3 pt-1 text-foreground placeholder-transparent outline-none transition-colors focus:border-gold";
+  return (
+    <label className="block">
+      <span className="text-[0.65rem] uppercase tracking-[0.3em] text-muted-foreground">{label}</span>
+      {textarea ? (
+        <textarea name={name} rows={4} className={cls} value={value} onChange={onChange} required={required} />
+      ) : (
+        <input type={type} name={name} className={cls} value={value} onChange={onChange} required={required} />
+      )}
+    </label>
   );
 }
 
