@@ -142,11 +142,6 @@ function Hero() {
         <div className="scroll-indicator relative h-14 w-px bg-border" />
       </div>
 
-      {/* corner detail */}
-      <div className="pointer-events-none absolute bottom-10 right-6 z-10 hidden text-right lg:block">
-        <div className="eyebrow">Currently Developing</div>
-        <div className="mt-2 font-serif text-xl text-foreground">Bengaluru · Mysuru · Hyderabad</div>
-      </div>
     </section>
   );
 }
@@ -182,7 +177,7 @@ function About() {
               </div>
               <div className="mt-6 flex items-center gap-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
                 <span className="h-px w-12 bg-gold" />
-                Crafted Since 2009
+                Crafted Since 2004
               </div>
             </Reveal>
           </div>
