@@ -53,15 +53,15 @@ function Navbar() {
           : "bg-transparent py-7"
       }`}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 lg:px-12">
-        <a href="#home" className="flex items-center gap-3">
+      <div className="mx-auto flex max-w-[1400px] items-center px-6 lg:px-12">
+        <a href="#home" className="flex shrink-0 items-center gap-3">
           <img src="/logo.jpeg" alt="Shree Vathsa Reddy Developments" className="h-10 w-auto" />
-          <span className="font-serif text-2xl tracking-tight text-foreground">
-            Shree <span className="text-gold">Vathsa</span>
+          <span className="font-serif text-base tracking-tight text-foreground sm:text-xl lg:text-2xl">
+            SHREE VATHSA REDDY <span className="text-gold">DEVELOPMENTS</span>
           </span>
         </a>
 
-        <nav className="hidden lg:flex items-center gap-9">
+        <nav className="hidden flex-1 items-center justify-center gap-9 pl-4 lg:flex lg:pl-8">
           {NAV.map((n) => (
             <a key={n.href} href={n.href} className="nav-link">
               {n.label}
@@ -69,7 +69,7 @@ function Navbar() {
           ))}
         </nav>
 
-        <a href="#contact" className="hidden md:inline-flex btn-burgundy !py-3 !px-6">
+        <a href="#contact" className="hidden shrink-0 md:inline-flex btn-burgundy !ml-10 !py-3 !px-6 lg:!ml-14">
           <span>Enquire Now</span>
         </a>
       </div>
@@ -215,12 +215,12 @@ function About() {
 }
 
 const SERVICES = [
-  { icon: LandPlot, title: "Residential Layout Development", body: "RERA-approved gated plotted communities with full infrastructure, landscaping and clubhouse amenities — engineered for generations." },
+  { icon: LandPlot, title: "Residential Layout Development", body: "Gated plotted communities with full infrastructure, landscaping and clubhouse amenities, designed to create lasting value for generations." },
   { icon: Building2, title: "Commercial Land Development", body: "Strategic commercial parcels along high-growth corridors, planned for retail, office and mixed-use occupiers of distinction." },
-  { icon: Home, title: "Villa Projects", body: "Architect-led luxury villas with private gardens, designer interiors and premium fittings sourced from leading European houses." },
-  { icon: Compass, title: "Plot Sales", body: "A curated inventory of clear-title residential and farm plots in the most sought-after micro-markets across South India." },
-  { icon: TrendingUp, title: "Investment Advisory", body: "Independent, data-led counsel on land acquisition, holding strategy and disposition — tailored to your portfolio horizon." },
-  { icon: MessageSquareQuote, title: "Property Consultation", body: "Personal consultation on legal due diligence, valuation, joint ventures and lifecycle management of premium real estate." },
+  { icon: Home, title: "Villa Projects", body: "Thoughtfully planned villas with spacious layouts, private gardens, quality finishes, and practical details suited to modern Indian family living." },
+  { icon: Compass, title: "Plot Sales", body: "A curated inventory of clear-title residential and farm plots in the most sought-after micro-markets across Bengaluru." },
+  { icon: TrendingUp, title: "Investment Advisory", body: "Practical guidance shaped by our development experience, helping you understand location potential, project quality, and long-term property value." },
+  { icon: MessageSquareQuote, title: "Property Consultation", body: "Personal guidance for buying and selling plots, understanding site potential, and planning apartment construction with practical real estate insight." },
 ];
 
 function Services() {
@@ -240,9 +240,6 @@ function Services() {
                 <s.icon strokeWidth={1} className="h-10 w-10 text-gold transition-transform duration-500 group-hover:-translate-y-1" />
                 <h3 className="mt-8 font-serif text-2xl text-foreground">{s.title}</h3>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
-                <div className="mt-8 flex items-center gap-3 text-[0.65rem] uppercase tracking-[0.3em] text-gold opacity-0 transition-opacity duration-500 group-hover:opacity-100">
-                  Learn More <ArrowRight className="h-3.5 w-3.5" />
-                </div>
                 <span className="absolute left-0 top-0 h-px w-0 bg-gold transition-all duration-700 group-hover:w-full" />
               </div>
             </Reveal>
@@ -258,7 +255,7 @@ const PROJECTS = [
     id: "private-house",
     img: privateHouseMain,
     name: "Private House",
-    location: "BTS Layout",
+    location: "RBI Layout",
     status: "Completed",
     area: "Luxury Residential",
     desc: "A meticulously crafted private residence showcasing contemporary architecture, premium finishes, and thoughtful landscape design.",
@@ -402,16 +399,16 @@ function Projects() {
 
 const REASONS = [
   { icon: ShieldCheck, title: "Trusted Development", body: "Fifteen years of on-time, as-promised delivery across every category we operate in." },
-  { icon: FileText, title: "Transparent Documentation", body: "Clear titles, RERA-registered projects and a documentation room you are welcome to audit." },
-  { icon: MapPin, title: "Prime Locations", body: "Acquisitions only along proven and emerging growth corridors of South India." },
-  { icon: Sparkles, title: "Quality Infrastructure", body: "Engineered roads, underground utilities, designed landscape — the spine of every layout we build." },
+  { icon: FileText, title: "Transparent Documentation", body: "We keep every conversation clear and every document easy to review, with RERA approval currently on hold and full updates shared with care." },
+  { icon: MapPin, title: "Prime Locations", body: "Acquisitions only along proven and emerging growth corridors of Bengaluru." },
+  { icon: Sparkles, title: "Quality Infrastructure", body: "From strong construction practices to thoughtful real estate planning, we focus on durable spaces, practical layouts, and details that support everyday living." },
   { icon: TrendingUp, title: "Investment Value", body: "Land that has historically out-performed benchmark indices over a five-year horizon." },
   { icon: Users, title: "Customer First", body: "A dedicated relationship manager from first visit through registration and beyond." },
 ];
 
 function WhyChoose() {
   return (
-    <section id="properties" className="relative bg-surface/40 py-28 lg:py-40">
+    <section id="why-us" className="relative bg-surface/40 py-28 lg:py-40">
       <div className="mx-auto max-w-[1400px] px-6 lg:px-12">
         <SectionHeading
           eyebrow="Why Choose Us"
@@ -453,14 +450,14 @@ function Counter({ to, suffix = "+" }: { to: number; suffix?: string }) {
     });
     return () => controls.stop();
   }, [inView, to]);
-  return <span ref={ref}>{val}{suffix}</span>;
+  return <span ref={ref}>{val.toLocaleString("en-IN")}{suffix}</span>;
 }
 
 const STATS = [
   { value: 500, label: "Happy Customers" },
-  { value: 30, label: "Projects Delivered" },
+  { value: 10, label: "Projects Delivered" },
   { value: 20, label: "Years of Experience" },
-  { value: 100, label: "Acres Developed" },
+  { value: 10000, label: "Sqft Developed" },
 ];
 
 function Stats() {
@@ -548,6 +545,13 @@ function Contact() {
                   <div>
                     <div className="eyebrow">Email</div>
                     <p className="mt-2 text-foreground/90">svrdevelopments.in@gmail.com</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-5">
+                  <Instagram className="h-5 w-5 shrink-0 text-gold" strokeWidth={1.4} />
+                  <div>
+                    <div className="eyebrow">Instagram</div>
+                    <p className="mt-2 text-foreground/90">@svrdevelopments</p>
                   </div>
                 </div>
               </div>
@@ -666,7 +670,7 @@ function Footer() {
         <div className="grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="font-serif text-3xl tracking-tight text-foreground">
-              Shree <span className="text-gold">Vathsa</span> Reddy
+              SHREE VATHSA REDDY <span className="text-gold">DEVELOPMENTS</span>
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Trusted real estate and construction solutions — Strong Foundations, Lasting Impressions. 20+ years of excellence and integrity.
