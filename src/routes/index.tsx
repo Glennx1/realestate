@@ -3,17 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform, animate } from "motion/react";
 import emailjs from "@emailjs/browser";
 import {
-  ArrowRight, Phone, MapPin, Mail, Instagram, Facebook, Linkedin, Youtube,
+  ArrowRight, Phone, MapPin, Mail,
   Compass, Building2, Home, LandPlot, TrendingUp, MessageSquareQuote,
   ShieldCheck, FileText, Sparkles, Users, Quote, X,
 } from "lucide-react";
 
-import hero from "@/assets/hero.jpg";
+import hero from "@/assets/hero.png";
 import about from "@/assets/about.jpg";
 import ctaImg from "@/assets/cta.jpg";
 
-const privateHouseMain = "/properties/private-house-bts/gallery/h1p1.jpg";
-const hulimauvuMain = "/properties/hulimavu/gallery/h2p1.png";
+const privateHouseMain = "/properties/rbi/gallery/h1p1.jpg";
+const hulimavuMain = "/properties/hulimavu/gallery/1.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -252,39 +252,63 @@ function Services() {
 
 const PROJECTS = [
   {
-    id: "private-house",
-    img: privateHouseMain,
-    name: "Private House",
+    id: "rbi",
+    folder: "rbi",
+    hero: { type: 'image', src: privateHouseMain },
+    name: "RBI Layout Residence",
     location: "RBI Layout",
     status: "Completed",
     area: "Luxury Residential",
     desc: "A meticulously crafted private residence showcasing contemporary architecture, premium finishes, and thoughtful landscape design.",
     media: [
-      { type: 'image', src: '/properties/private-house-bts/gallery/h1p1.jpg', alt: 'Private House - Gallery 1' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v1.MOV', alt: 'Private House - Tour 1' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v2.MOV', alt: 'Private House - Tour 2' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v3.MOV', alt: 'Private House - Tour 3' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v4.MOV', alt: 'Private House - Tour 4' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v5.MOV', alt: 'Private House - Tour 5' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v6.MOV', alt: 'Private House - Tour 6' },
-      { type: 'video', src: '/properties/private-house-bts/videos/h1v7.MOV', alt: 'Private House - Tour 7' },
+      { type: 'image', src: '/properties/rbi/gallery/h1p1.jpg', alt: 'RBI Layout Residence - Gallery 1' },
+      { type: 'video', src: '/properties/rbi/videos/h1v1.MOV', alt: 'RBI Layout Residence - Tour 1' },
+      { type: 'video', src: '/properties/rbi/videos/h1v2.MOV', alt: 'RBI Layout Residence - Tour 2' },
+      { type: 'video', src: '/properties/rbi/videos/h1v3.MOV', alt: 'RBI Layout Residence - Tour 3' },
+      { type: 'video', src: '/properties/rbi/videos/h1v4.MOV', alt: 'RBI Layout Residence - Tour 4' },
+      { type: 'video', src: '/properties/rbi/videos/h1v5.MOV', alt: 'RBI Layout Residence - Tour 5' },
+      { type: 'video', src: '/properties/rbi/videos/h1v6.MOV', alt: 'RBI Layout Residence - Tour 6' },
+      { type: 'video', src: '/properties/rbi/videos/h1v7.MOV', alt: 'RBI Layout Residence - Tour 7' },
     ],
   },
   {
     id: "hulimavu",
-    img: hulimauvuMain,
+    folder: "hulimavu",
+    hero: { type: 'image', src: hulimavuMain },
     name: "Hulimavu Residential",
     location: "Hulimavu",
     status: "Under Construction",
     area: "Premium Development",
-    desc: "An exclusive residential development featuring thoughtfully designed units, premium amenities, and carefully curated public spaces.",
+    desc: "A premium residential development currently under construction, featuring thoughtfully planned homes, amenity-rich spaces, and a long-term focus on quality and value.",
     media: [
-      { type: 'image', src: '/properties/hulimavu/gallery/h2p1.png', alt: 'Hulimavu - Gallery 1' },
+      { type: 'image', src: '/properties/hulimavu/gallery/1.jpeg', alt: 'Hulimavu - Gallery 1' },
+      { type: 'image', src: '/properties/hulimavu/gallery/2.jpeg', alt: 'Hulimavu - Gallery 2' },
+      { type: 'image', src: '/properties/hulimavu/gallery/3.jpeg', alt: 'Hulimavu - Gallery 3' },
       { type: 'video', src: '/properties/hulimavu/videos/h2v1.mp4', alt: 'Hulimavu - Overview 1' },
       { type: 'video', src: '/properties/hulimavu/videos/h2v2.mp4', alt: 'Hulimavu - Overview 2' },
       { type: 'video', src: '/properties/hulimavu/videos/h2v3.mp4', alt: 'Hulimavu - Overview 3' },
       { type: 'video', src: '/properties/hulimavu/videos/h2v4.mp4', alt: 'Hulimavu - Overview 4' },
       { type: 'video', src: '/properties/hulimavu/videos/h2v5.mp4', alt: 'Hulimavu - Overview 5' },
+    ],
+  },
+  {
+    id: "bts",
+    folder: "bts",
+    hero: { type: 'video', src: '/properties/bts/videos/h2v4.mp4' },
+    name: "BTS Property",
+    location: "BTS Layout",
+    status: "Under Construction",
+    area: "Residential Showcase",
+    desc: "An under-construction BTS layout project showcasing upcoming residential spaces, modern finishes, and progress-focused visuals.",
+    media: [
+      { type: 'video', src: '/properties/bts/videos/h2v4.mp4', alt: 'BTS Property - Tour 1' },
+      { type: 'video', src: '/properties/bts/videos/IMG_1118.MOV', alt: 'BTS Property - Tour 2' },
+      { type: 'video', src: '/properties/bts/videos/IMG_1119.MOV', alt: 'BTS Property - Tour 3' },
+      { type: 'video', src: '/properties/bts/videos/IMG_1121.MOV', alt: 'BTS Property - Tour 4' },
+      { type: 'video', src: '/properties/bts/videos/IMG_1122.MOV', alt: 'BTS Property - Tour 5' },
+      { type: 'video', src: '/properties/bts/videos/VID-20260624-WA0059.mp4', alt: 'BTS Property - Tour 6' },
+      { type: 'video', src: '/properties/bts/videos/VID-20260624-WA0062.mp4', alt: 'BTS Property - Tour 7' },
+      { type: 'video', src: '/properties/bts/videos/VID-20260624-WA0064.mp4', alt: 'BTS Property - Tour 8' },
     ],
   },
 ];
@@ -312,7 +336,7 @@ function ProjectGallery({ project, isOpen, onClose }: { project: typeof PROJECTS
           <div className="text-center py-20 text-muted-foreground">
             <p>Gallery media coming soon. Add images and videos to:</p>
             <p className="mt-2 text-sm text-foreground/60">
-              {`src/assets/properties/${project.id === 'private-house' ? 'private-house-bts' : 'hulimavu'}/`}
+              {`src/assets/properties/${project.folder}/`}
             </p>
           </div>
         ) : (
@@ -360,7 +384,11 @@ function Projects() {
             <Reveal key={p.id} delay={i * 0.1}>
               <article className="group cursor-pointer">
                 <div className="relative aspect-[4/5] overflow-hidden">
-                  <img src={p.img} alt={p.name} loading="lazy" width={1280} height={960} className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-110" />
+                  {p.hero?.type === 'video' ? (
+                    <video src={p.hero.src} controls className="h-full w-full object-cover bg-black" />
+                  ) : (
+                    <img src={p.hero?.src ?? p.img} alt={p.name} loading="lazy" width={1280} height={960} className="h-full w-full object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-110" />
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/30 to-transparent" />
                   <div className="absolute left-6 top-6">
                     <span className="bg-burgundy px-3 py-1.5 text-[0.6rem] uppercase tracking-[0.3em] text-ivory">{p.status}</span>
@@ -547,13 +575,6 @@ function Contact() {
                     <p className="mt-2 text-foreground/90">svrdevelopments.in@gmail.com</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-5">
-                  <Instagram className="h-5 w-5 shrink-0 text-gold" strokeWidth={1.4} />
-                  <div>
-                    <div className="eyebrow">Instagram</div>
-                    <p className="mt-2 text-foreground/90">@svrdevelopments</p>
-                  </div>
-                </div>
               </div>
             </Reveal>
           </div>
@@ -675,13 +696,6 @@ function Footer() {
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Trusted real estate and construction solutions — Strong Foundations, Lasting Impressions. 20+ years of excellence and integrity.
             </p>
-            <div className="mt-8 flex items-center gap-4">
-              {[Instagram, Facebook, Linkedin, Youtube].map((Icon, i) => (
-                <a key={i} href="#" aria-label="social link" className="grid h-10 w-10 place-items-center border border-border text-muted-foreground transition-colors hover:border-gold hover:text-gold">
-                  <Icon className="h-4 w-4" strokeWidth={1.4} />
-                </a>
-              ))}
-            </div>
           </div>
 
           <div className="lg:col-span-2">
