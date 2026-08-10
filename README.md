@@ -1,4 +1,4 @@
-This is a freelance website I created for a real estate company based out of Bangalore, India.
+This is a website for a real estate company called SVR Developments based out of Bangalore, India.
 
 It has interactive features such as email.js, google maps and also a whatsapp button link that takes you directly to their chat. 
 
